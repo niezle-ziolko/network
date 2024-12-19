@@ -1,0 +1,9 @@
+.card {
+  background-color: #F5F5F5;
+  border: 2px solid dimgrey;
+}
+
+.inline {
+  display: flex;
+  align-items: center; /* Vertical align the elements to the center */
+}

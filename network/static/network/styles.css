@@ -1,7 +1,109 @@
-.card {
-  background-color: #F5F5F5;
-  border: 2px solid dimgrey;
+@font-face {
+  font-family: 'TwitterChirp';
+  src: url('/static/network/Chirp-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  display: swap;
 }
+@font-face {
+  font-family: 'TwitterChirp';
+  src: url('/static/network/Chirp-Medium.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  display: swap;
+}
+@font-face {
+  font-family: 'TwitterChirp';
+  src: url('/static/network/Chirp-Bold.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  display: swap;
+}
+body {
+  display: flex;
+  color: #e7e9ea;
+  justify-content: center;
+  background-color: #000;
+  font-family: TwitterChirp;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+header {
+  width: 275px;
+  border-right: 1px solid #2F3336;
+}
+footer {
+  width: 275px;
+  border-left: 1px solid #2F3336;
+}
+ul {
+  padding-inline-start: 0;
+}
+#nav-icon {
+  font-size: 20px;
+  color: #e7e9ea;
+}
+a.nav-link {
+  font-size: 20px;
+  color: #e7e9ea;
+  text-decoration: none;
+}
+a.card-title {
+  margin: 0;
+  color: #e7e9ea;
+  text-decoration: none;
+}
+a.card-title:hover {
+  text-decoration: underline;
+}
+.nav-item {
+  align-items: center;
+  display: flex;
+  padding: 12px;
+}
+.logo {
+  padding: 5px;
+}
+.nav-item:hover, .logo:hover {
+  background-color: #eff3f41a;
+  border-radius: 25px;
+  width: fit-content;
+  transition: all 0.2s;
+}
+.nav-text {
+  margin-left: 20px;
+  margin-right: 16px;
+}
+.nav-button {
+  background-color: #e7e9ea;
+  border: 1px solid #e7e9ea;
+  border-radius: 25px;
+  padding: 15px 25px;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  width: 185px;
+}
+.nav-button:hover {
+  background-color: #d7dbdc;
+  transition: all 0.2s;
+}
+.nav-item.button {
+  background-color: transparent;
+  border-radius: 25px;
+  width: auto;
+}
+.body {
+  max-width: 750px;
+  min-width: 700px;
+}
+.post {
+  border-bottom: 1px solid #2F3336;
+  padding: 16px;
+}
+
+
 
 .inline {
   display: flex;

@@ -1,18 +1,15 @@
 {% extends "network/layout.html" %}
 {% block body %}
-
-<br>
-<h2>All Posts</h2>
-<hr>
-<br>
+<div style="border-bottom: 1px solid #2F3336;">
+   <h2 style="margin: 15px;">All Posts</h2>
+</div>
 
 <div class="container">
-   <!-- Show paginated posts -->
    {% for tweet in page_obj %}
-   <div class="row justify-content-center mb-4">
-      <div class="ms-2 card" style="width: 35rem" data-id="{{tweet.id}}";>
+   <div class="post">
+      <div class="card" data-id="{{tweet.id}}">
          <div class="card-body rounded">
-            <h5 class="card-title"><a href="{% url 'profile' user_id=tweet.author.id%}"><b>@{{ tweet.author}}</b></h5></a>
+            <a class="card-title" href="{% url 'profile' user_id=tweet.author.id%}"><b>{{ tweet.author }}</b></a>
             <h6 class="card-subtitle mb-2 text-muted">{{tweet.posted}}</h6>
             <p class="card-text" id="tweetText">{{tweet.tweetText}}</p>
 
@@ -29,7 +26,6 @@
             {% endif %}
          </div>
       </div>
-      <br>
    </div>
    {% endfor %}
 
@@ -148,4 +144,5 @@
       }
 
    </script>
+   </div>
    {% endblock %}

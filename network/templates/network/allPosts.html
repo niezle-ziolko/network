@@ -9,8 +9,11 @@
    <div class="post">
       <div class="card" data-id="{{tweet.id}}">
          <div class="card-body rounded">
-            <a class="card-title" href="{% url 'profile' user_id=tweet.author.id%}"><b>{{ tweet.author }}</b></a>
-            <h6 class="card-subtitle mb-2 text-muted">{{tweet.posted}}</h6>
+            <div class="card-info">
+            <a class="card-title" href="{% url 'profile' user_id=tweet.author.id%}"><strong>@{{ tweet.author }}</strong></a>
+            <i class="fa-solid fa-square-check" id="check"></i>
+            <h6 class="card-subtitle">{{tweet.posted}}</h6>
+            </div>
             <p class="card-text" id="tweetText">{{tweet.tweetText}}</p>
 
             <!-- If user likes post, show like button as red; otherwise grey  -->

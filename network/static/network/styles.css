@@ -52,6 +52,7 @@ a.card-title {
   margin: 0;
   color: #e7e9ea;
   text-decoration: none;
+  font-size: 14px;
 }
 a.card-title:hover {
   text-decoration: underline;
@@ -102,6 +103,30 @@ a.card-title:hover {
   border-bottom: 1px solid #2F3336;
   padding: 16px;
 }
+.card-info {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.card-subtitle {
+  margin: 0;
+  font-weight: normal;
+  color: #71767B;
+}
+#check {
+  color: #1D9BF0;
+  font-size: 14px;
+}
+#heart {
+  color: #c94c4c;
+}
+#foo {
+  border: none;
+  background-color: transparent;
+  color: #c94c4c;
+  font-size: 15px;
+}
+
 
 
 

@@ -136,7 +136,7 @@ a.page-link.disabled {
 .card-subtitle {
   margin: 0;
   font-weight: normal;
-  color: #71767B;
+  color: #71767b;
 }
 #check {
   color: #1d9bf0;
@@ -180,9 +180,55 @@ a.page-link.disabled {
 .page-item {
   display: block;
 }
-
-
-.inline {
+.profile {
+  border-bottom: 1px solid #2F3336;
+  padding: 15px;
+}
+p.follow-number {
+  font-weight: 600;
+  margin-bottom: .5em;
+}
+p.text-profile {
+  margin-right: 15px;
+  font-weight: normal;
+  color: #71767b;
+  margin-bottom: .5em;
+}
+span.everywhere {
+  color: #71767b;
+  font-size: 14px;
+}
+.profile-box {
   display: flex;
-  align-items: center; /* Vertical align the elements to the center */
+  justify-content: space-between;
+}
+.button-follow {
+  font-family: TwitterChirp;
+  font-weight: bold;
+  background-color: transparent;
+  color: #e7e9ea;
+  border: 1px solid #e7e9ea;
+  padding: 20px 30px;
+  height: 20px;
+  align-items: center;
+  display: flex;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button-unfollow {
+  font-family: TwitterChirp;
+  font-weight: bold;
+  background-color: #e7e9ea;
+  color: #000;
+  border: 1px solid #e7e9ea;
+  padding: 20px 30px;
+  height: 20px;
+  align-items: center;
+  display: flex;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button-unfollow:hover {
+  background-color: #d7dbdc;
+  transition: all 0.2s;
 }

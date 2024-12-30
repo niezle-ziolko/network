@@ -5,11 +5,14 @@
     <head>
         <title>{% block title %}_N{% endblock %}</title>
         <link rel="icon" type="image/svg+xml" href="{% static '/network/favicon.ico' %}" />
-        <link rel="stylesheet" href="{% static 'network/styles.css' %}"/>
         <link rel="preload" href="{% static '/network/Chirp-Regular.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="preload" href="{% static '/network/Chirp-Bold.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="preload" href="{% static '/network/Chirp-Medium.woff2' %}" as="font" crossorigin="" type="font/woff">
+        <link rel="stylesheet" href="{% static 'network/styles.css' %}"/>
+        <script src="{% static 'network/script.js' %}"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        {% block script %}
+        {% endblock %}
     </head>
 
     <body>
@@ -70,5 +73,22 @@
                 </ul>
             </div>
         </footer>
+
+        <!-- Modal HTML -->
+        <div id="postModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="popup-interface">
+                    <h2 style="margin: 0px;">Create Post</h2>
+                    <i class="fa-solid fa-xmark" id="close-popup"></i>
+                </div>
+                <form action="{% url 'tweet' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" placeholder="&#128017; - What's happening, ewe?"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary float-end mt-3" value="Bleet!">
+                </form>
+            </div>
+        </div>
     </body>
 </html>

@@ -36,6 +36,19 @@ footer {
   width: 275px;
   border-left: 1px solid #2F3336;
 }
+textarea {
+  background-color: #000;
+  border: 1px solid #2F3336;
+  color: #e7e9ea;
+  border-radius: 4px;
+  resize: vertical;
+  height: 5em;
+  font-size: 16px;
+  font-family: TwitterChirp;
+  width: 100%;
+  width: fill-available;
+  width: -webkit-fill-available;
+}
 ul {
   padding-inline-start: 0;
 }
@@ -56,6 +69,18 @@ a.card-title {
 }
 a.card-title:hover {
   text-decoration: underline;
+}
+a.page-link {
+  color: #1d9bf0;
+}
+a.page-link.disabled {
+  color: #e7e9ea;
+  text-decoration: none;
+  cursor: default;
+}
+.sticky {
+  position: fixed;
+  margin-top: 5px;
 }
 .nav-item {
   align-items: center;
@@ -114,7 +139,7 @@ a.card-title:hover {
   color: #71767B;
 }
 #check {
-  color: #1D9BF0;
+  color: #1d9bf0;
   font-size: 14px;
 }
 #heart {
@@ -125,9 +150,36 @@ a.card-title:hover {
   background-color: transparent;
   color: #c94c4c;
   font-size: 15px;
+  cursor: pointer;
 }
-
-
+#foo-like {
+  border: none;
+  background-color: transparent;
+  color: #c94c4c;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#number {
+  font-weight: bold;
+}
+.button-edit {
+  border: none;
+  background-color: transparent;
+  color: #1d9bf0;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  align-items: center;
+}
+.page-item {
+  display: block;
+}
 
 
 .inline {

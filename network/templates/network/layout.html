@@ -14,7 +14,7 @@
 
     <body>
         <header>
-            <div style="position: fixed;">
+            <div class="sticky">
                 <div class="logo">
                     <a href="{% url 'index' %}">
                         <img src="{% static '/network/logo.webp' %}" height="45" alt="logo"/>
@@ -34,7 +34,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'profile' user_id=user.id%}">
                                         <i class="fa-regular fa-user" id="nav-icon"></i>
-                                        <strong class="nav-text">{{ user.username }}</strong>
+                                        <strong class="nav-text" style="margin-left: 27px;">{{ user.username }}</strong>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -59,7 +59,7 @@
         </div>
 
         <footer>
-            <div style="position: fixed; margin-left: 12px;">
+            <div class="sticky" style="margin-left: 12px;">
                 <ul>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}" role="button">

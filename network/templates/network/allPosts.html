@@ -18,14 +18,19 @@
 
             <!-- If user likes post, show like button as red; otherwise grey  -->
             {% if user.username in tweet.like.all|stringformat:'s' %}
-            <button class="btn btn-danger float-left" id="foo">&hearts;&nbsp;<span id="number">{{ tweet.like.all.count }}</span></button> 
+            <button class="button-like" id="foo-like">
+               <i class="fa-solid fa-heart"></i>&nbsp;<span id="number">{{ tweet.like.all.count }}</span>
+            </button> 
             {% else %}
-            <button class="btn btn-secondary float-left" id="foo">&hearts;&nbsp;<span id="number">{{ tweet.like.all.count }}</span></button> 
+            <button class="button-secondary" id="foo">
+               <i class="fa-regular fa-heart"></i>&nbsp;<span id="number">{{ tweet.like.all.count }}</span>
+            </button> 
             {% endif %}
+
 
             <!-- If user is author of post, show edit button -->
             {% if user.username == tweet.author|stringformat:'s' %}
-            <button class="btn btn-primary float-end edit" id="edit">  Edit</button>
+            <button class="button-edit" id="edit">  Edit</button>
             {% endif %}
          </div>
       </div>
@@ -35,14 +40,14 @@
    <!-- Page navigation -->
    <br>
    <nav aria-label="Page">
-      <ul class="pagination justify-content-center">
+      <ul class="pagination">
          {% if page_obj.has_previous %}
          <li class="page-item">
             <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
          </li>
          {% else %}
          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+            <a class="page-link disabled" href="#" tabindex="-1" aria-disabled="True">Previous</a>
          </li>
          {% endif %}
          {% for i in page_obj.paginator.page_range %}
@@ -63,7 +68,7 @@
          </li>
          {% else %}
          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+            <a class="page-link disabled" href="#" tabindex="-1" aria-disabled="True">Next</a>
          </li>
          {% endif %}
       </ul>
@@ -71,80 +76,76 @@
 
    <script>
       document.addEventListener('DOMContentLoaded', function() {
-         document.querySelectorAll('button').forEach(button => {
-            button.onclick = function() {
+   document.querySelectorAll('button').forEach(button => {
+      button.onclick = function(event) {
+         const element = event.currentTarget; // Zmiana z event.target na event.currentTarget
 
-               // Detects if EDIT button clicked
-               if (event.target.className === "btn btn-primary float-end edit") {
-                  console.log(`Edit button clicked. Post number: ${this.parentElement.parentElement.dataset.id}`)
+         // Detects if EDIT button clicked
+         if (element.classList.contains("button-edit")) {
+            console.log(`Edit button clicked. Post number: ${this.parentElement.parentElement.dataset.id}`);
 
-                  const element = event.target
-                  const id = element.parentElement.parentElement.dataset.id
-                  const originalText = element.parentElement.querySelector("#tweetText").innerText
-                  
-                  // If edit button reads 'edit', create text area and change button text to 'save'
-                  if (element.parentElement.querySelector("#edit").innerText === "Edit") {
-                     element.parentElement.querySelector("#tweetText").innerHTML = '<textarea style="width: 32rem" id="edit_text"></textarea>'
-                     element.parentElement.querySelector("#edit_text").placeholder = originalText
+            const id = this.parentElement.parentElement.dataset.id;
+            const originalText = this.parentElement.querySelector("#tweetText").innerText;
 
-                     element.parentElement.querySelector("#edit").innerHTML = "Save"
+            // If edit button reads 'edit', create text area and change button text to 'save'
+            if (this.innerText === "Edit") {
+               this.parentElement.querySelector("#tweetText").innerHTML = '<textarea id="edit_text"></textarea>';
+               this.parentElement.querySelector("#edit_text").placeholder = originalText;
+               this.innerText = "Save";
 
-                  // If edit button reads 'save', update post
-                  } else if (element.parentElement.querySelector("#edit").innerText === "Save") {
+            // If edit button reads 'save', update post
+            } else if (this.innerText === "Save") {
+               fetch(`/edit/${id}`, {
+                  method: 'POST',
+                  body: JSON.stringify({
+                     tweet: this.parentElement.querySelector("#edit_text").value
+                  })
+               })
+               .then(response => response.json())
+               .then(result => {
+                  console.log(`Edited text: ${result.new_text}`);
+                  this.parentElement.querySelector("#tweetText").innerHTML = result.new_text;
+                  this.innerText = "Edit";
+               });
+            }
 
-                     fetch(`/edit/${id}`, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                           tweet: element.parentElement.querySelector("#edit_text").value
-                        })
-                     })
+         // Detects if LIKE button clicked
+         } else if (element.classList.contains("button-secondary") || element.classList.contains("button-like")) {
+            console.log(`Like button clicked. Post number: ${this.parentElement.parentElement.dataset.id}`);
 
-                     .then(response => response.json())
-                     .then(result => {
-                        console.log(`Edited text: ${result.new_text}`)
+            const id = this.parentElement.parentElement.dataset.id;
 
-                        // Update displayed text and revert edit button text to 'edit'
-                        element.parentElement.querySelector("#tweetText").innerHTML = result.new_text
-                        element.parentElement.querySelector("#edit").innerHTML = "Edit"
-                     });   
-                  }
-
-               // Detects if LIKE button clicked
-               } else if (this.className === "btn btn-secondary float-left" || this.className === "btn btn-danger float-left") {
-                  console.log(`Like button clicked. Post number: ${this.parentElement.parentElement.dataset.id}`)
-
-                  const element = event.target
-                  const id = element.parentElement.parentElement.dataset.id
-
-                  // Update database then HTML
-                  fetch(`/like/${id}`), {
-                     method: 'POST'}
-                     like(element);
-                  }
-               }
+            // Update database then HTML
+            fetch(`/like/${id}`, {
+               method: 'POST'
+            })
+            .then(response => {
+               // Call the like function to update the UI
+               like(element); // Użyj elementu, który jest przyciskiem
             });
-      });
-
-      // Like / unlike post
-      function like(tweet) {
-
-         // Get current number of likes
-         var likes = tweet.querySelector("#number").innerHTML
-
-         // Increment / deincrement number of likes and change colour of button
-         if (tweet.classList.contains("btn-secondary")) {
-
-            tweet.className = "btn btn-danger float-left";
-            likes++
-            tweet.querySelector("#number").innerHTML = likes
-
-         } else {
-
-            tweet.className = "btn btn-secondary float-left";
-            likes--
-            tweet.querySelector("#number").innerHTML = likes
          }
-      }
+      };
+   });
+});
+
+
+// Like / unlike post
+function like(tweet) {
+   var likesElement = tweet.querySelector("#number");
+   var likes = parseInt(likesElement.innerHTML);
+
+   if (tweet.classList.contains("button-secondary")) {
+      tweet.className = "button-like"; // Zmień klasę na "lajk"
+      likes++;
+      tweet.querySelector("i").className = "fa-solid fa-heart"; // Zmień ikonę na "lajk"
+   } else {
+      tweet.className = "button-secondary"; // Zmień klasę na "odlajk"
+      likes--;
+      tweet.querySelector("i").className = "fa-regular fa-heart"; // Zmień ikonę na "odlajk"
+   }
+
+   likesElement.innerHTML = likes; // Zaktualizuj liczbę polubień
+}
 
    </script>
    </div>

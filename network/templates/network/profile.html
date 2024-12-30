@@ -1,11 +1,11 @@
 {% extends "network/layout.html" %}
 {% block body %}
 
-<br>
 <div class="inline">
-   <hr><br>
+   <h2 data-id="{{viewed_profile_id}}">@{{viewed_profile}}</h2>
 
-   <h2 data-id="{{viewed_profile_id}}">User: {{viewed_profile}}</h2>
+   <!-- Display number of users following and followed by -->
+   <i><p class="text-muted">Following: {{following}}, Followers: {{followedBy}}</p></i>
 
    {% if user.username == viewed_profile %}
    <button type="button" style = "position:relative; bottom:2px;" class="follow btn btn-primary ms-4" disabled>Follow</button>
@@ -17,12 +17,8 @@
    <button type="button" style = "position:relative; bottom:2px;" class="follow btn btn-primary ms-4">Follow</button>
    {% endif %}
    {% endif %}
-
 </div>
-<!-- Display number of users following and followed by -->
-<i><p class="text-muted">Following: {{following}}, Followers: {{followedBy}}</p></i>
-<hr>
-<br>
+
 
 <div class="container">
    <!-- Show paginated posts -->
@@ -87,6 +83,7 @@
          {% endif %}
       </ul>
    </nav>
+   </div>
 
    <script>
 

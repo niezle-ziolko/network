@@ -10,8 +10,8 @@
         <link rel="preload" href="{% static '/network/Chirp-Medium.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="stylesheet" href="{% static 'network/styles.css' %}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js"></script>
         <script src="{% static 'network/script.js' %}"></script>
+        <script type="module" src="{% static 'network/module.js' %}"></script>
         {% block script %}
         {% endblock %}
     </head>
@@ -85,28 +85,16 @@
                 <form action="{% url 'tweet' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" placeholder="&#128017; - What's happening, ewe?"></textarea>
-                        <button id="emoji-button">Click Me</button>
+                        <textarea class="form-control" id="post-textarea" name="exampleFormControlTextarea1" rows="3" placeholder="😁 - What's up?"></textarea>
                     </div>
-                    <input type="submit" class="btn btn-primary float-end mt-3" value="Bleet!">
+                    <div class="popup-button-box">
+                        <button id="emoji-button" class="button-emoji" type="button">
+                            <i class="fa-regular fa-face-laugh-wink"></i>
+                        </button>
+                        <input type="submit" class="button-post" value="Post">
+                    </div>
                 </form>
             </div>
         </div>
-        <script type="module">
-            import { EmojiButton } from 'https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js';
-
-const button = document.querySelector('#emoji-button');
-const textarea = document.querySelector('#post-textarea');
-const picker = new EmojiButton();
-
-button.addEventListener('click', (event) => {
-    event.preventDefault(); // Prevent page reload
-    picker.togglePicker(button);
-});
-
-picker.on('emoji', (emoji) => {
-    textarea.value += emoji; // Append emoji to textarea
-});
-          </script>
     </body>
 </html>

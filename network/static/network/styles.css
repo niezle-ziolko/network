@@ -49,6 +49,7 @@ textarea {
   width: 100%;
   width: fill-available;
   width: -webkit-fill-available;
+  padding: 10px;
 }
 ul {
   padding-inline-start: 0;
@@ -112,7 +113,7 @@ a.page-link.disabled {
   font-weight: 600;
   width: 185px;
 }
-.nav-button:hover {
+.nav-button:hover, .button-post:hover, .button-unfollow:hover {
   background-color: #d7dbdc;
   transition: all 0.2s;
 }
@@ -229,10 +230,7 @@ span.everywhere {
   border-radius: 25px;
   cursor: pointer;
 }
-.button-unfollow:hover {
-  background-color: #d7dbdc;
-  transition: all 0.2s;
-}
+
 .modal {
   position: fixed;
   z-index: 1000;
@@ -274,4 +272,29 @@ span.everywhere {
   background-color: #eff3f41a;
   transition: all 0.2s;
   border-radius: 25px;
+}
+.popup-button-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.button-emoji {
+  border: none;
+  background-color: transparent;
+  color: #1d9bf0;
+  font-size: 20px;
+  cursor: pointer;
+}
+.emoji-picker__wrapper {
+  z-index: 1000;
+}
+.button-post {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 1px solid #e7e9ea;
+  font-weight: 600;
+  background-color: #e7e9ea;
+  color: #000;
+  cursor: pointer;
+  font-size: 13px;
 }

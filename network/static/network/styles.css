@@ -189,6 +189,7 @@ a.page-link.disabled {
 p.follow-number {
   font-weight: 600;
   margin-bottom: .5em;
+  margin-right: 3px;
 }
 p.text-profile {
   margin-right: 15px;

@@ -15,7 +15,6 @@ urlpatterns = [
     # API routes
     path("follow/<int:user_id>", views.follow, name="follow"),
     path("edit/<int:post_id>", views.edit, name="edit"),
-    path("like/<int:post_id>", views.like, name="like")
-    
-
+    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post')
+    path("like/<int:post_id>", views.like, name="like"),
 ]

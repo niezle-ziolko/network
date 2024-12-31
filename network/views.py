@@ -9,13 +9,14 @@ import json # JSON functionality
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt   # CSRF exemption
 from .models import *   # Import all models
+from django.shortcuts import redirect
 
 
 # Index route (default)
 def index(request):
 
     if request.user.is_authenticated:
-        return render(request, "network/index.html")
+        return redirect('allPosts')
 
     # Everyone else is prompted to sign in
     else:
@@ -243,6 +244,23 @@ def edit(request, post_id):
 
     # Return new text for instant display
     return JsonResponse({"message": "Post successfully edited", "new_text": new_text}, status=201)
+
+@csrf_exempt
+@login_required(redirect_field_name='my_redirect_field')
+def delete_post(request, post_id):
+    # Sprawdź, czy metoda żądania to DELETE
+    if request.method == 'DELETE':
+        # Pobierz post na podstawie post_id
+        tweet = get_object_or_404(Tweet, pk=post_id)
+
+        # Sprawdź, czy użytkownik jest właścicielem posta
+        if tweet.user == request.user:  # Zakładając, że Tweet ma pole user
+            tweet.delete()
+            return JsonResponse({"message": "Post successfully deleted"}, status=204)
+        else:
+            return JsonResponse({"error": "You do not have permission to delete this post"}, status=403)
+    else:
+        return JsonResponse({"error": "Invalid request method"}, status=400)
 
 
 # API function: Like post

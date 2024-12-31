@@ -54,7 +54,8 @@
 
             <!-- If user is author of post, show edit button -->
             {% if user.username == tweet.author|stringformat:'s' %}
-            <button class="button-edit" id="edit">  Edit</button>
+            <button class="button-edit" id="edit">Edit</button>
+            <button class="button-delete" id="delete">Delete</button>
             {% endif %}
          </div>
       </div>

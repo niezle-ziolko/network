@@ -8,6 +8,8 @@
         <link rel="preload" href="{% static '/network/Chirp-Regular.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="preload" href="{% static '/network/Chirp-Bold.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="preload" href="{% static '/network/Chirp-Medium.woff2' %}" as="font" crossorigin="" type="font/woff">
+        {% block font %}
+        {% endblock %}
         <link rel="stylesheet" href="{% static 'network/styles.css' %}"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <script src="{% static 'network/script.js' %}"></script>

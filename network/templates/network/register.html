@@ -2,16 +2,22 @@
 {% load static %}
 
 {% block body %}
-<div>
-<div>
-<img src="{% static '/network/logo.svg' %}" height="45" alt="logo"/>
+<div class="register">
+<div class="box-image">
+<img src="{% static '/network/logo.svg' %}" height="400" alt="logo"/>
 </div>
 
+<div class="box-login">
 <div>
-{% if message %}
+   {% if message %}
 <div>{{ message }}</div>
 {% endif %}
 
+<h2 class="title">Happening now</h2>
+
+<h3 class="subtitle">Join today.</h3>
+
+<div class="form-login">
 <form action="{% url 'register' %}" method="post">
   {% csrf_token %}
   <div class="form-group">
@@ -36,4 +42,10 @@
 <br>Already have an account? <a href="{% url 'login' %}">Log In here.</a>
 </div>
 </div>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+   <link rel="preload" href="{% static '/network/Chirp-Extended-Heavy.woff2' %}" as="font" crossorigin="" type="font/woff">
 {% endblock %}

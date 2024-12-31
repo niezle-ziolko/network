@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.core.paginator import Paginator   # Pagination functionality   
 import json # JSON functionality
@@ -246,22 +246,18 @@ def edit(request, post_id):
     return JsonResponse({"message": "Post successfully edited", "new_text": new_text}, status=201)
 
 @csrf_exempt
-@login_required(redirect_field_name='my_redirect_field')
+@login_required
 def delete_post(request, post_id):
-    # Sprawdź, czy metoda żądania to DELETE
-    if request.method == 'DELETE':
-        # Pobierz post na podstawie post_id
-        tweet = get_object_or_404(Tweet, pk=post_id)
+    if request.method != "DELETE":
+        return JsonResponse({"error": "Invalid HTTP method. Use DELETE."}, status=405)
 
-        # Sprawdź, czy użytkownik jest właścicielem posta
-        if tweet.user == request.user:  # Zakładając, że Tweet ma pole user
-            tweet.delete()
-            return JsonResponse({"message": "Post successfully deleted"}, status=204)
-        else:
-            return JsonResponse({"error": "You do not have permission to delete this post"}, status=403)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+    post = get_object_or_404(Tweet, id=post_id)
 
+    if request.user != post.author:
+        return JsonResponse({"error": "You are not authorized to delete this post."}, status=403)
+
+    post.delete()
+    return JsonResponse({"message": "Post deleted successfully."}, status=200)
 
 # API function: Like post
 @csrf_exempt

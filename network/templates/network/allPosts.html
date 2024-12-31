@@ -31,7 +31,12 @@
 
             <!-- If user is author of post, show edit button -->
             {% if user.username == tweet.author|stringformat:'s' %}
-            <button class="button-edit" id="edit">  Edit</button>
+            <button class="button-edit" id="edit">
+               <i class="fa-regular fa-pen-to-square"></i>&nbsp;<span>Edit</span>
+            </button>
+            <button class="button-delete" data-id="{{ tweet.id }}">
+               <i class="fa-regular fa-trash-can"></i>&nbsp;<span>Delete</span>
+            </button>
             {% endif %}
          </div>
       </div>

@@ -27,12 +27,7 @@
                <i class="fa-regular fa-heart"></i>&nbsp;<span id="number">{{ tweet.like.all.count }}</span>
             </button> 
             {% endif %}
-
-
-            <!-- If user is author of post, show edit button -->
-            {% if user.username == tweet.author|stringformat:'s' %}
-            <button class="button-edit" id="edit">  Edit</button>
-            {% endif %}
+            
          </div>
       </div>
    </div>

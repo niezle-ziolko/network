@@ -113,7 +113,7 @@ a.page-link.disabled {
   font-weight: 600;
   width: 185px;
 }
-.nav-button:hover, .button-post:hover, .button-unfollow:hover {
+.nav-button:hover, .button-post:hover, .button-follow:hover {
   background-color: #d7dbdc;
   transition: all 0.2s;
 }
@@ -169,7 +169,15 @@ a.page-link.disabled {
   border: none;
   background-color: transparent;
   color: #1d9bf0;
-  font-size: 15px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.button-delete {
+  border: none;
+  background-color: transparent;
+  color: #f4212e;
+  font-size: 13px;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -208,6 +216,19 @@ span.everywhere {
 .button-follow {
   font-family: TwitterChirp;
   font-weight: bold;
+  background-color: #e7e9ea;
+  color: #000;
+  border: 1px solid #e7e9ea;
+  padding: 20px 30px;
+  height: 20px;
+  align-items: center;
+  display: flex;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button-following {
+  font-family: TwitterChirp;
+  font-weight: bold;
   background-color: transparent;
   color: #e7e9ea;
   border: 1px solid #e7e9ea;
@@ -221,9 +242,9 @@ span.everywhere {
 .button-unfollow {
   font-family: TwitterChirp;
   font-weight: bold;
-  background-color: #e7e9ea;
-  color: #000;
-  border: 1px solid #e7e9ea;
+  background-color: #f4212e1a;
+  color: #f4212e;
+  border: 1px solid #67070f;
   padding: 20px 30px;
   height: 20px;
   align-items: center;
@@ -249,10 +270,9 @@ span.everywhere {
   background-color: #000;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
+  min-width: 620px;
   text-align: left;
-  max-width: 600px;
+  max-width: 660px;
 }
 .popup-interface {
   display: flex;

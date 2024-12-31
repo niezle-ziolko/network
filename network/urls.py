@@ -9,12 +9,12 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("tweet", views.tweet, name="tweet"),
     path("profile/<int:user_id>", views.profile, name="profile"),
-    path("allPosts", views.allPosts, name="allPosts"),
+    path("all-posts", views.allPosts, name="allPosts"),
     path("following", views.following, name="following"),
 
     # API routes
     path("follow/<int:user_id>", views.follow, name="follow"),
     path("edit/<int:post_id>", views.edit, name="edit"),
-    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post')
+    path('delete/<int:post_id>/', views.delete_post, name='delete_post'),
     path("like/<int:post_id>", views.like, name="like"),
 ]

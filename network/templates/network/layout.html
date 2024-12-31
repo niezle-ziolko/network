@@ -9,8 +9,9 @@
         <link rel="preload" href="{% static '/network/Chirp-Bold.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="preload" href="{% static '/network/Chirp-Medium.woff2' %}" as="font" crossorigin="" type="font/woff">
         <link rel="stylesheet" href="{% static 'network/styles.css' %}"/>
-        <script src="{% static 'network/script.js' %}"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js"></script>
+        <script src="{% static 'network/script.js' %}"></script>
         {% block script %}
         {% endblock %}
     </head>
@@ -85,10 +86,27 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" placeholder="&#128017; - What's happening, ewe?"></textarea>
+                        <button id="emoji-button">Click Me</button>
                     </div>
                     <input type="submit" class="btn btn-primary float-end mt-3" value="Bleet!">
                 </form>
             </div>
         </div>
+        <script type="module">
+            import { EmojiButton } from 'https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js';
+
+const button = document.querySelector('#emoji-button');
+const textarea = document.querySelector('#post-textarea');
+const picker = new EmojiButton();
+
+button.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent page reload
+    picker.togglePicker(button);
+});
+
+picker.on('emoji', (emoji) => {
+    textarea.value += emoji; // Append emoji to textarea
+});
+          </script>
     </body>
 </html>
